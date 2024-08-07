@@ -1,0 +1,4 @@
+Contact Full Name: ${contact.fullName} 
+Contact Email: ${contact.email} 
+Request Type: ${contact.requestType} 
+Request Description: ${contact.description} 

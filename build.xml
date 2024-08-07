@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<!--
+	This first executes the Maven build.
+	Then deploys the WAR file to the production server.
+	There are the option of two types of deploy:
+	1) The option to restart the server when deploying with the "default" set as "deploy".
+	2) The option to deply without restating the server with the "deploy-no-restart" set as default.
+-->	
+<project name="testbranch" default="deploy">
+	
+	<description>Build and deploy file for the TestBranch web application.</description>
+	 
+	<property file="build.properties" />	 
+	<property name="build.path" value="target" />
+	
+	<!-- Maven build -->
+	<target name="mvn-build">
+		<echo>Maven build.</echo>		
+	    <exec dir="." executable="bash">
+	        <arg line="-c 'mvn clean package -P prod'" />
+	    </exec>
+	</target>
+	
+	<!-- 1) deploy - This target deploys the WAR file to the destination server -->
+	<target name="deploy"  description="Deploy the WAR file" depends="mvn-build">
+        <echo>Deploying the TestBranch WAR file and restart the server.</echo>    
+        <scp file="${build.path}/${app.name}.war" todir="root@52.56.212.216:/opt/tomcat/webapps" password="${server.pass}" trust="true"/>
+        <sshexec host="52.56.212.216" username="root" password="${server.pass}" command="service tomcat stop" trust="true"/>
+        <sshexec host="52.56.212.216" username="root" password="${server.pass}" command="cd /opt/tomcat/webapps/; rm -rf ${app.name}; unzip -d ${app.name} ${app.name}.war" trust="true"/>
+        <sshexec host="52.56.212.216" username="root" password="${server.pass}" command="cd /opt/tomcat/webapps/; chown -Rf tomcat.tomcat ${app.name}*" trust="true"/>
+        <sshexec host="52.56.212.216" username="root" password="${server.pass}" command="service tomcat start" trust="true"/>      
+	 </target>
+	 
+	<!-- 2) deploy - This target deploys the WAR file to the destination server without retarting -->	
+	<target name="deploy-no-restart" description="Deploy the WAR file (without restart)" depends="mvn-build">
+		<echo>Deploying the TestBranch WAR file without server restart.</echo>
+		  	<scp file="${build.path}/${app.name}.war" todir="root@52.56.212.216:/root/testbranch" password="${server.pass}" />
+		<echo>Deploying the TestBranch WAR file Completed.</echo>
+	</target>
+
+</project>
