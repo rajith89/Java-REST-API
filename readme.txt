@@ -1,12 +1,11 @@
-TestBranch Web Application
+Java REST API CRUD Example
 ==========================
 
 Overview and Programming Technologies
 -------------------------------------
 	
-	This document is a technical overview of the TestBranch web site.
+	This document is a technical overview of the Java REST CRUD APIs.
 	The application is mostly a Java REST API which serves the mobile client.
-	It has a few JSP web pages which have mostly static content. It has a main home page and also terms and privacy pages.
 	
 
 Run, Build and Deploy 
@@ -14,7 +13,6 @@ Run, Build and Deploy
 	
 	This project is run as a Maven project.
 	
-	Go to Eclipse "Run configuration" and it will be available in the Maven Build.
 	
 	Local URL: http://localhost:8080/testbranch
 
@@ -25,5 +23,14 @@ Run, Build and Deploy
 	A path needs to be added to the Run configuration environment to access Maven build
 		Name: PATH
 		Value: /Users/home/Documents/apache-maven-3.6.3/bin:${env_var:PATH}
+		
+Technolgoies Used
+-----------------		
+
+Java 1.8
+Spring Boot 2.2.2
+Mysql
+flyway
+swagger-ui
 		
 				 	
