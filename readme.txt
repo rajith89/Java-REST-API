@@ -1,11 +1,11 @@
-Java REST API CRUD Example
+Java REST API for CRUD 
 ==========================
 
 Overview and Programming Technologies
 -------------------------------------
 	
 	This document is a technical overview of the Java REST CRUD APIs.
-	The application is mostly a Java REST API which serves the mobile client.
+	The application is mostly a Java REST API which serves the mobile/Web client.
 	
 
 Run, Build and Deploy 
@@ -32,5 +32,6 @@ Spring Boot 2.2.2
 Mysql
 flyway
 swagger-ui
+Spring Security with JWT
 		
 				 	
